@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    class myBrowser {
+      constructor() {
+        this.IE6_10 = /*cc_on!@*/ false;
+        this.IE7_11 = !!document.documentMode;
+        this.arr = [
+          "Android",
+          "iPhone",
+          "SymbianOS",
+          "Windows Phone",
+          "iPad",
+          "iPod",
+        ];
+        this.flag = true;
+        this.Agent = navigator.userAgent;
+      }
+      ISIE() {
+        return this.IE6_10 || this.IE7_11;
+      }
+      ISPC() {
+        for (let key of this.arr) {
+          if (this.Agent.includes(key)) {
+            this.flag = false;
+            break;
+          }
+        }
+        return this.flag;
+      }
+      ISIOS() {
+        if (this.Agent.includes("iPhone")) {
+          return true;
+        }
+        return false;
+      }
+    }
+    const ny = new myBrowser();
+    console.log(ny.ISIOS());
+    var myBrowsers = {
+      ISIE: function () {
+        return /*cc_on!@*/ false || !!document.documentMode;
+      },
+      ISPC: function () {
+        var userAgentInfo = navigator.userAgent;
+        var arr = new Array(
+          "Android",
+          "iPhone",
+          "SymbianOS",
+          "Windows Phone",
+          "iPad",
+          "iPod"
+        );
+        var flag = true;
+        for (var v = 0; v < arr.length; v++) {
+          if (userAgentInfo.indexOf(arr[v]) > 0) {
+            flag = false;
+            break;
+          }
+        }
+        return flag;
+      },
+    };
+
+    // console.log(myBrowsers.ISPC());
+  </script>
+</html>

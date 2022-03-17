@@ -1,0 +1,4 @@
+<view class="video-item-wrapper">
+  <van-image class="video-item-image" radius="12rpx" width="100%" height="240rpx" fit="cover" src="{{url}}"></van-image>
+  <text class="video-item-title">{{title}}</text>
+</view>

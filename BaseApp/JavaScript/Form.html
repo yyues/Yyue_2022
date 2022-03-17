@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XXXX</title>
+  </head>
+  <body>
+    <form action="#">
+      <label for="username">username</label>
+      <input type="text" name="username" id="username" />
+      <button id="btn" type="submit">submit</button>
+    </form>
+  </body>
+  <script>
+    const btn = document.getElementById("btn");
+    btn.onclick = (e) => {
+      e.preventDefault();
+      // btn.className = "yaoyue";
+      console.log("you are click it now");
+      console.log(form.username.value);
+    };
+    const form = document.forms[0];
+    // form.submit();
+    console.log(form);
+  </script>
+</html>

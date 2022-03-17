@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    const findMedianSortedArrays = function(nums1, nums2) {
+        let s = nums1.concat(nums2).sort((a,b)=>{
+            return a-b
+        })
+        let len = s.length
+        const index = (len-1)/2
+        let index_1 =len/2
+        let res= (s[index_1]+s[index_1 - 1])/2
+        if ( len % 2 !== 0){
+            // 他是奇数
+            return s[index].toFixed(5)
+        } else {
+            return  res.toFixed(5)
+        }
+    };
+    const nums1 = [3] , nums2 = [-2,-1]
+    console.log(findMedianSortedArrays(nums1,nums2));
+</script>
+</html>

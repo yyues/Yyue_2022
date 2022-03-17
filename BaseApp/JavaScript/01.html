@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body></body>
+  <script type="text/javascript">
+    let a = 10 + "20" - 10;
+    console.log(a);
+    let arr = [];
+    arr[0] = 1;
+    arr[2] = 2;
+    arr.foo = 3;
+    console.log(arr.length);
+    function mySum(...params) {
+      return params.reduce((pre, cur) => {
+        return pre + cur;
+      }, 0);
+    }
+    class myEvent {
+      constructor() {
+        this._event = {};
+      }
+      on(eventName) {}
+    }
+    console.log(mySum(1, 2, 3, 4, 5));
+    const appname = window.navigator.vendor;
+    const windowsWidth = document.documentElement.clientWidth;
+    // alert(appname);
+    console.log(windowsWidth);
+  </script>
+</html>

@@ -1,0 +1,13 @@
+.video-item-wrapper {
+  padding: 16rpx 8rpx;
+}
+.video-item-wrapper .video-item-image {
+  max-height: 240rpx;
+}
+.video-item-wrapper .video-item-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

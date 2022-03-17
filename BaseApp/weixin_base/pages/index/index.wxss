@@ -1,0 +1,8 @@
+.music-base .music-swiper {
+  width: auto;
+  height: 300rpx;
+  padding: 0 20rpx;
+}
+.music-base .music-swiper .swiper-item {
+  border-radius: 10rpx;
+}

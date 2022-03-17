@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    function deepClone(p, c) {
+      var c = c || {};
+      for (var key in p) {
+        if (typeof p[key] === "object") {
+          c[key] = p[key] instanceof Array ? [] : {};
+          deepClone(p[key], c[key]);
+        } else {
+          c[key] = p[key];
+        }
+      }
+    }
+    let obj1 = {
+      name: "yaoyue",
+      age: 21,
+      tel: "17630969845",
+      info: {
+        des: "hehehe",
+        from: "henan",
+        chird: {
+          name: "yaoyue son",
+          age: 18,
+        },
+      },
+    };
+    console.log(obj1);
+    let obj2 = obj1;
+    console.log(obj2);
+    console.log("*--------*");
+    obj2.name = "ppppp";
+    console.log(obj2);
+    console.log(obj1);
+    console.log("*--------*");
+    let deepobj = {};
+    deepClone(obj1, deepobj);
+    console.log(deepobj);
+    console.log("*--------*");
+    deepobj.name = "hahaha";
+    console.log(deepobj);
+    console.log(obj1);
+  </script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reduce</title>
+</head>
+<body>
+    <div>reduce</div>
+
+</body>
+<script>
+    const array_1 =[65, 44, 12, 4]
+    let array_after_1 = array_1.reduce((pre,cur) => {
+        //计算数组的和
+        return pre+cur
+    })
+    let array_after_2 =array_1.reduce((pre, cur) => {
+        //求数组最大值
+        //类似数组里的对象操作
+        return Math.max(pre,cur);
+        // 当然也可以返回最小值
+        // return Math.min(pre,cur);
+    })
+    console.log(array_after_1);
+    console.log(array_after_2)
+
+
+    const array_2=[
+        { price:'7.2', number:'3' },
+        { price:'10', number:'2' },
+        { price:'9.9', number:'1' }
+    ]
+    let array_2_after_1= array_2.reduce((pre, cur) =>{
+        //计算数组类某两元素的和
+        let first = parseFloat(cur.price) * parseFloat(cur.number)
+        return   pre+ first
+    },0)
+    console.log(array_2_after_1);
+
+
+    const array_3 = [[1, 2, 8], [3, 4, 9], [5, 6, 10]];
+    let array_3_after = array_3.reduce((pre, cur) => {
+        return  pre.concat(cur)
+    }, []);
+    console.log(array_3_after);
+
+    const array_4 =[
+        {key:'1', name:'林青霞'},
+        {key:'2', name:'张三丰'},
+        {key:'1', name:'段誉'},
+    ]
+    const array_4_obj = {}
+    let array_4_after_1= array_4.reduce((pre,cur)=>{
+        array_4_obj[cur.key] ? '' : array_4_obj[cur.key] = true && pre.push(cur)
+        return pre
+    },[])
+    console.log(array_4_after_1);
+</script>
+</html>

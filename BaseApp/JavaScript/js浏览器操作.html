@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">点击获取位置</button>
+  </body>
+  <script>
+    // 获取连接位置,在http下没啥用
+    let p;
+    const btn = document.getElementById("btn");
+    btn.onclick = () => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => (p = position),
+        (e) => {
+          console.log(e);
+        }
+      );
+      // console.log(p);
+    };
+    // 判断用户是否联网
+    const isConnect = () => {
+      console.log(navigator.onLine);
+      // 获取充电信息
+      navigator.getBattery().then((res) => {
+        console.log(res);
+      });
+      console.log(navigator.deviceMemory);
+    };
+    // isConnect();
+    window.addEventListener("online", isConnect);
+    window.addEventListener("offline", isConnect);
+  </script>
+</html>

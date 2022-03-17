@@ -1,0 +1,10 @@
+.video-wrapper {
+  height: 100vh;
+}
+.video-wrapper .video-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.video-wrapper .video-content .video-item {
+  width: 50%;
+}

@@ -1,0 +1,18 @@
+.login-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-image: url("https://www.bing.com/th?id=OHR.RoanRhododendron_ZH-CN6519978283_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"); */
+}
+.login {
+  width: 400px;
+  height: 300px;
+  border: 1px solid #999999;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

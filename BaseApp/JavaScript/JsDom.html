@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <div class="index" id="body">
+      <button id="btn">clickonce</button>
+    </div>
+    <div>
+      <ul id="list"></ul>
+    </div>
+    <div id="shadow"></div>
+  </body>
+  <script type="text/javascript">
+    const btn = document.getElementById("btn");
+    const list = document.getElementById("list");
+
+    // btn.onclick = function (e) {
+    // btn.style.width = "200px";
+    // btn.style.height = "300px";
+    // btn.style.border = "none";
+    // btn.style.backgroundColor = "#999999";
+    // }
+    const arary = [
+      { id: 1, name: "yaoyue", age: 24 },
+      { id: 2, name: "xln", age: 26 },
+      { id: 3, name: "xiaohong", age: 22 },
+    ];
+    const handleArr = arary.reduce((pre, cur) => {
+      return pre + `<li>${cur.name}</li>`;
+      // 不要尝试在里面直接复制，不过我也没这么做，因为试了却不对
+    }, "");
+    list.innerHTML = handleArr;
+    // 处理点击事件
+    const li = document.getElementsByTagName("li");
+    Array.from(li).forEach((item) => {
+      item.onclick = function (event) {
+        console.log(event.target.innerHTML);
+      };
+    });
+
+    btn.addEventListener("click", () => {
+      // const event = document.createEvent(" ");
+      // event.keyCode = 122;
+      // window.dispatchEvent(event);
+      // event.charCode = 122;
+      // F11 功能实现失败
+      const n = new Notification("dididi,nihaoa", {
+        body: "nizaiganshane",
+        // vibrate: true,
+      });
+      setTimeout(() => n.close(), 3000);
+    });
+
+    for (let color of ["green", "red", "blue"]) {
+      const shadow = document.getElementById("shadow");
+      const div = document.createElement("div");
+      const shadowDom = div.attachShadow({ mode: "open" });
+      shadow.appendChild(div);
+      shadowDom.innerHTML = `
+      <p>make me ${color}</p>
+      <style>
+          p{
+            color:${color}
+          }
+        </style>
+      `;
+    }
+  </script>
+</html>

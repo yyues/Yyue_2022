@@ -4,8 +4,16 @@ import {
   RouteLocationNormalized
 } from 'vue-router'
 import { Route } from './type'
+import Home from '/@/views/home/home.vue'
 
 const routes: Route[] = [
+  {
+    path: '/',
+    component: Home,
+    meta: {
+      title: 'Home'
+    }
+  },
   {
     path: '/login',
     component: () => import('/@/views/login/login.vue'),
@@ -19,6 +27,14 @@ const routes: Route[] = [
     component: () => import('/@/views/sys/404.vue'),
     meta: {
       title: 'Page Not Found',
+      keepAlive: false
+    }
+  },
+  {
+    path: '/405',
+    component: () => import('/@/views/sys/405.vue'),
+    meta: {
+      title: 'Page Not Permission',
       keepAlive: false
     }
   }

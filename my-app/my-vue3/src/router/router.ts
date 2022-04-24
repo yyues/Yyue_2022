@@ -11,7 +11,8 @@ const routes: Route[] = [
     path: '/',
     component: Home,
     meta: {
-      title: 'Home'
+      title: 'Home',
+      keepAlive: true
     }
   },
   {

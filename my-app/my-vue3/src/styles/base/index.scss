@@ -8,3 +8,21 @@ li {
 #app {
   height: 100vh;
 }
+
+.my-layout {
+  height: 100%;
+  .my-header {
+    background-color: skyblue;
+  }
+  .my-content {
+    flex: auto;
+    background-color: whitesmoke;
+    .my-aside {
+      background-color: green;
+      transition: width 0.28s;
+    }
+    .my-main {
+      // background-color: red;
+    }
+  }
+}

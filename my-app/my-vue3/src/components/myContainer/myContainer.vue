@@ -1,5 +1,6 @@
 <template>
-  <el-container class="my-layout">
+  <el-container :class="['my-layout', { 'is-app': isApp }, 'font-sans']">
+    <div class="app-shadow" v-if="isApp && isOpen && !isHidden" @click="handleCloseAside"></div>
     <el-header :height="height" class="my-header">
       <slot name="header"></slot>
     </el-header>
@@ -7,7 +8,12 @@
       <template v-if="hasAside">
         <!-- has aside -->
         <el-aside
-          :class="['my-aside', { 'is-collapse': isCollapse }, { 'is-hidden': isHidden }]"
+          :class="[
+            'my-aside',
+            { 'is-collapse': isCollapse },
+            { 'is-hidden': isHidden },
+            { 'is-open': isOpen }
+          ]"
           :width="width"
         >
           <slot name="aside"></slot>
@@ -46,26 +52,37 @@ export default defineComponent({
     const width = ref<string>('200px')
     const isCollapse = computed(() => store.state.app.isCollapse)
     const isHidden = computed(() => store.state.app.isHidden)
+    const isOpen = computed(() => store.state.app.isOpen)
     const store = useStore()
     const CollapseWidth = computed(() => store.state.app.CollapseWidth)
     const HiddenWidth = computed(() => store.state.app.HiddenWidth)
+    const isApp = computed(() => store.state.app.isApp)
     const handleResize = (): void => {
       let isCollapse = false,
         isHidden = false
       if (window.innerWidth > CollapseWidth.value) {
         isCollapse = false
         isHidden = false
+        store.commit('app/setTypeBySizeAndKey', { key: 'isWeb', value: true })
       }
       if (window.innerWidth < CollapseWidth.value && window.innerWidth > HiddenWidth.value) {
         isCollapse = true
         isHidden = false
+        store.commit('app/setTypeBySizeAndKey', { key: 'isPad', value: true })
       }
       if (window.innerWidth < HiddenWidth.value) {
         isCollapse = false
         isHidden = true
+        store.commit('app/setTypeBySizeAndKey', { key: 'isApp', value: true })
       }
       store.commit('app/setIsHidden', isHidden)
       store.commit('app/setIsCollapse', isCollapse)
+    }
+    const handleOpen = (): void => {
+      store.commit('app/setIsOpen', isHidden.value && !isOpen.value)
+    }
+    const handleCloseAside = (): void => {
+      store.commit('app/setIsOpen', false)
     }
     // 初始化 isCollapse isHidden Status
     handleResize()
@@ -76,7 +93,11 @@ export default defineComponent({
     return {
       width,
       isCollapse,
-      isHidden
+      isHidden,
+      isOpen,
+      isApp,
+      handleOpen,
+      handleCloseAside
     }
   }
 })

@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 body {
   margin: 0;
 }
@@ -11,17 +14,43 @@ li {
 
 .my-layout {
   height: 100%;
+  position: relative;
+  &.is-app {
+    .is-open {
+      position: absolute;
+      height: 100%;
+      left: 0;
+      top: 0;
+      z-index: 20;
+    }
+  }
   .my-header {
     background-color: skyblue;
+  }
+  .app-shadow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 10;
   }
   .my-content {
     flex: auto;
     background-color: whitesmoke;
     .my-aside {
       background-color: green;
-      transition: width 0.28s;
+      transition: width 0.28s ease-in-out;
+      &.is-collapse {
+        width: 40px !important;
+      }
+      &.is-hidden {
+        display: none;
+      }
     }
     .my-main {
+      padding: 10px;
       // background-color: red;
     }
   }

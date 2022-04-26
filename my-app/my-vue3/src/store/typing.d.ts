@@ -6,8 +6,16 @@ export interface AppState {
   HiddenWidth: number
   isCollapse: boolean
   isHidden: boolean
+  isOpen: boolean
+  isWeb: boolean
+  isApp: boolean
+  isPad: boolean
 }
-
+export enum SizeType {
+  isWeb = 'isWeb',
+  isPad = 'isPad',
+  isApp = 'isApp'
+}
 export interface AllState extends RootState {
   app: AppState
 }

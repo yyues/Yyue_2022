@@ -1,7 +1,0 @@
-<scroll-view class="video-wrapper" scroll-y="true">
-  <view class="video-content">
-    <block wx:for="{{videoList}}" wx:key="index">
-      <video-item class="video-item" url="{{item.data.coverUrl}}" title="{{item.data.title}}" data-id="{{item.data.vid}}" bindtap="handleClick"></video-item>
-    </block>
-  </view>
-</scroll-view>

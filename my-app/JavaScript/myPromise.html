@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyPromise</title>
+  </head>
+  <body></body>
+  <script>
+    class MyPromise {
+      PENDING = 'pending'
+      FULFILLED = 'fulfilled'
+      REJECTED = 'rejected'
+      constructor(fn) {
+        let status = PENDING
+        let value, reason
+        try {
+          fn(this.resolve.bind(this), this.reject.bind(this))
+        } catch (error) {
+          this.reject(error)
+        }
+      }
+      isFun(fn) {
+        return typeof fn === 'function'
+      }
+
+      resolve(value) {
+        if (this.status == PENDING) {
+          this.value = value
+          this.status = FULFILLED
+        }
+      }
+      reject(reason) {
+        if (this.status == PENDING) {
+          this.reason = reason
+          this.status = REJECTED
+        }
+      }
+      FULFILLED_CALLBACK_LIST = []
+      REJECTED_CALLBACK_LIST = []
+      // use ES6 set and get watch status
+      _status = PENDING
+
+      get status() {
+        return this._status
+      }
+      set status(newStatus) {
+        this._status = newStatus
+        switch (newStatus) {
+          case FULFILLED:
+            this.FULFILLED_CALLBACK_LIST.forEach(callback => callback(this.value))
+            break
+          case REJECTED:
+            this.REJECTED_CALLBACK_LIST.forEach(callback => callback(this.reason))
+            break
+        }
+      }
+
+      then(onFulfilled, onRejected) {
+        const realOnFulfilled = this.isFun(onFulfilled) ? onFulfilled : value => value
+        const realOnRejected = this.isFun(onRejected) ? onRejected : reason => reason
+        const returnPromise = new MyPromise((resolve, reject) => {
+          const fulfilledMicrotask = () => {
+            queueMicrotask(() => {
+              try {
+                const x = realOnFulfilled(this.value)
+                this.resolvePromise(returnPromise, x, resolve, reject)
+              } catch (error) {
+                reject(err)
+              }
+            })
+          }
+          const rejectedMicrotask = () => {
+            queueMicrotask(() => {
+              try {
+                const x = realOnRejected(this.reason)
+                this.resolvePromise(returnPromise, x, resolve, reject)
+              } catch (error) {
+                reject(err)
+              }
+            })
+          }
+
+          switch (this.status) {
+            case FULFILLED:
+              realOnFulfilled(this.value)
+              break
+            case REJECTED:
+              realOnRejected(this.reason)
+              break
+            case PENDING:
+              this.FULFILLED_CALLBACK_LIST.push(realOnFulfilled)
+              this.REJECTED_CALLBACK_LIST.push(realOnRejected)
+              break
+          }
+        })
+
+        return returnPromise
+      }
+      catch(onRejected) {
+        return this.then(null, onRejected)
+      }
+      resolvePromise(promise2, x, resolve, reject) {
+        // 如果 newPromise 和 x 指向同一对象，以 TypeError 为据因拒绝执行 newPromise
+        // 这是为了防止死循环
+        if (promise2 === x) {
+          return reject(new TypeError('The promise and the return value are the same'))
+        }
+
+        if (x instanceof MPromise) {
+          // 如果 x 为 Promise ，则使 newPromise 接受 x 的状态
+          // 也就是继续执行x，如果执行的时候拿到一个y，还要继续解析y
+          queueMicrotask(() => {
+            x.then(y => {
+              this.resolvePromise(promise2, y, resolve, reject)
+            }, reject)
+          })
+        } else if (typeof x === 'object' || this.isFunction(x)) {
+          // 如果 x 为对象或者函数
+          if (x === null) {
+            // null也会被判断为对象
+            return resolve(x)
+          }
+
+          let then = null
+
+          try {
+            // 把 x.then 赋值给 then
+            then = x.then
+          } catch (error) {
+            // 如果取 x.then 的值时抛出错误 e ，则以 e 为据因拒绝 promise
+            return reject(error)
+          }
+
+          // 如果 then 是函数
+          if (this.isFunction(then)) {
+            let called = false
+            // 将 x 作为函数的作用域 this 调用
+            // 传递两个回调函数作为参数，第一个参数叫做 resolvePromise ，第二个参数叫做 rejectPromise
+            try {
+              then.call(
+                x,
+                // 如果 resolvePromise 以值 y 为参数被调用，则运行 resolvePromise
+                y => {
+                  // 需要有一个变量called来保证只调用一次.
+                  if (called) return
+                  called = true
+                  this.resolvePromise(promise2, y, resolve, reject)
+                },
+                // 如果 rejectPromise 以据因 r 为参数被调用，则以据因 r 拒绝 promise
+                r => {
+                  if (called) return
+                  called = true
+                  reject(r)
+                }
+              )
+            } catch (error) {
+              // 如果调用 then 方法抛出了异常 e：
+              if (called) return
+
+              // 否则以 e 为据因拒绝 promise
+              reject(error)
+            }
+          } else {
+            // 如果 then 不是函数，以 x 为参数执行 promise
+            resolve(x)
+          }
+        } else {
+          // 如果 x 不为对象或者函数，以 x 为参数执行 promise
+          resolve(x)
+        }
+      }
+    }
+    const test = new MyPromise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(111)
+      }, 1000)
+    }).then(res => {
+      console.log(res)
+    })
+
+    console.log(test)
+
+    // setTimeout(() => {
+    //   console.log(test)
+    // }, 2000)
+  </script>
+</html>

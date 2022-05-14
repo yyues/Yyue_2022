@@ -1,11 +1,8 @@
 import React from 'react'
 
-function App() {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+import Login from './view/Login/Login'
 
+function App() {
+  return <Login />
+}
 export default App

@@ -98,7 +98,7 @@
 
 理解后得出以下结论
 
--  `v-bind="$attrs"`  会把 组件上没有作为props传递给子组件的数据，生成另外新的可供子组件访问的数据。
+- `v-bind="$attrs"`  会把 组件上没有作为props传递给子组件的数据，生成另外新的可供子组件访问的数据。
 - 一般来说  `v-bind="$attrs"` 会配合 `inheritAttrs: false,`使用
 
 但这里使用的是attrs，而不是$attrs, 能猜到，element是对此进行了抽离封装的。上代码
@@ -201,4 +201,3 @@ export default (params: Params = {}) => {
         <slot name="append"></slot>
       </div>
 ```
-

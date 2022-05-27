@@ -76,4 +76,3 @@ dataHandle({
 obj.one = 'first'
 obj.two = 'second'
 ```
-

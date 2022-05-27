@@ -57,6 +57,12 @@ export default defineComponent({
     const CollapseWidth = computed(() => store.state.app.CollapseWidth)
     const HiddenWidth = computed(() => store.state.app.HiddenWidth)
     const isApp = computed(() => store.state.app.isApp)
+    /**
+     * @description: 用来控制窗口容器的resize ，通过vuex控制状态，自动 设置 class 样式
+     * @param {*} void
+     * @return {*}
+     * @author: YaoYue
+     */
     const handleResize = (): void => {
       let isCollapse = false,
         isHidden = false

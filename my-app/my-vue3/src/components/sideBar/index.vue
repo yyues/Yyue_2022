@@ -1,5 +1,10 @@
 <template>
-  <el-menu :collapse="isCollapse" @select="handleClick" :collapse-transition="false">
+  <el-menu
+    :collapse="isCollapse"
+    @select="handleClick"
+    :collapse-transition="false"
+    :default-active="$router.path"
+  >
     <sideBarItem :router="routers" />
   </el-menu>
 </template>

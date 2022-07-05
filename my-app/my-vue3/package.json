@@ -8,14 +8,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.6",
     "element-plus": "^2.1.10",
     "lodash": "^4.17.21",
     "sass": "^1.50.1",
+    "unplugin-icons": "^0.14.7",
+    "vite-plugin-inspect": "^0.5.1",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@iconify-json/ep": "^1.1.6",
     "@vitejs/plugin-vue": "^2.3.0",
     "autoprefixer": "^10.4.5",
     "postcss": "^8.4.12",

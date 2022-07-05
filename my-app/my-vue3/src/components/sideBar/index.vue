@@ -25,13 +25,13 @@ export default {
         path: '/dashBoard',
         name: '首页',
         children: [],
-        icon: ''
+        icon: 'Apple'
       }
     ])
 
     const handleClick = path => {
       // console.log(e)
-      router.push(path)
+      // router.push(path)
     }
     return {
       isCollapse,

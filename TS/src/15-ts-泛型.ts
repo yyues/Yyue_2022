@@ -21,3 +21,10 @@ function createArray<T>(len: number, value: T): T[] {
   return new Array<T>(len).fill(value)
 }
 const res = createArray<string>(2, '100')
+
+function identity<T>(value: T): T {
+  return value
+}
+const createArr: <T>(len: number, value: T) => T[] = (len, value) => {
+  return new Array(len).fill(value)
+}

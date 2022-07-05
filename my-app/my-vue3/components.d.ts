@@ -11,9 +11,14 @@ declare module '@vue/runtime-core' {
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElMain: typeof import('element-plus/es')['ElMain']
+    ElMenu: typeof import('element-plus/es')['ElMenu']
+    ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     MyContainer: typeof import('./src/components/myContainer/myContainer.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SideBar: typeof import('./src/components/sideBar/index.vue')['default']
+    SideBarItem: typeof import('./src/components/sideBar/sideBarItem.vue')['default']
     SubmitButton: typeof import('./src/components/submitButton/submitButton.vue')['default']
   }
 }

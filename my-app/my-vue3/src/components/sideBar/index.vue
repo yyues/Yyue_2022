@@ -25,7 +25,7 @@ export default {
         path: '/dashBoard',
         name: '首页',
         children: [],
-        icon: 'Apple'
+        icon: 'Edit'
       }
     ])
 

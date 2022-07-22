@@ -6,6 +6,7 @@ export const app: Module<AppState, RootState> = {
   state: {
     CollapseWidth: 896,
     HiddenWidth: 500,
+    CollapseMenuWidth: 56,
     isCollapse: false,
     isHidden: false,
     isOpen: false,

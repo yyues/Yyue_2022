@@ -4,6 +4,7 @@ export interface RootState {
 export interface AppState {
   CollapseWidth: number
   HiddenWidth: number
+  CollapseMenuWidth: number
   isCollapse: boolean
   isHidden: boolean
   isOpen: boolean

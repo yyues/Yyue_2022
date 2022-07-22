@@ -4,6 +4,7 @@
       <sideBar />
     </template>
     <Table :header="columns" :data="tableData" hasSelection hasIndex />
+    <SvgIcon name="component"></SvgIcon>
   </myContainer>
 </template>
 <script lang="ts">

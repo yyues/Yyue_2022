@@ -6,6 +6,8 @@ import router from './router/router'
 import '/@/styles/base/index.scss'
 // Store
 import { store, key } from './store/store'
+// SVG
+import 'virtual:svg-icons-register'
 
 const app = createApp(App)
 
@@ -21,3 +23,6 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
+
+import SvgIcon from '/@/module/SvgIcon/index.vue'
+app.component('SvgIcon', SvgIcon)

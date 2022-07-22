@@ -28,7 +28,8 @@ export default {
         path: '/dashBoard',
         name: '首页',
         children: [],
-        icon: 'Edit'
+        icon: 'Edit',
+        svg: false
       }
     ])
 
@@ -49,7 +50,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-::v-deep .el-menu-tooltip__trigger {
+:deep(.el-menu-tooltip__trigger) {
   padding-right: 0;
   padding-left: v-bind(paddingLeft);
   width: v-bind(CollapseMenuWidth);

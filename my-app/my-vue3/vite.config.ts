@@ -14,6 +14,8 @@ import IconsResolver from 'unplugin-icons/resolver'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// SVG
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import Inspect from 'vite-plugin-inspect'
 
 const pathSrc = path.resolve(__dirname, 'src')
@@ -35,32 +37,12 @@ export default defineConfig({
   plugins: [
     Vue(),
     AutoImport({
-      // Auto import functions from Vue, e.g. ref, reactive, toRef...
-      // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
-      // imports: ['vue'],
-
-      // Auto import functions from Element Plus, e.g. ElMessage, ElMessageBox... (with style)
-      // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
-      resolvers: [
-        ElementPlusResolver()
-
-        // Auto import icon components
-        // 自动导入图标组件
-        // IconsResolver({
-        //   prefix: 'Icon'
-        // })
-      ],
-
+      resolvers: [ElementPlusResolver()],
       dts: path.resolve(pathSrc, 'auto-imports.d.ts')
     }),
 
     Components({
       resolvers: [
-        // Auto register icon components
-        // 自动注册图标组件
-        // IconsResolver({
-        //   enabledCollections: ['ep']
-        // }),
         // Auto register Element Plus components
         // 自动导入 Element Plus 组件
         ElementPlusResolver()
@@ -71,6 +53,24 @@ export default defineConfig({
 
     Icons({
       autoInstall: true
+    }),
+    createSvgIconsPlugin({
+      // 指定需要缓存的图标文件夹
+      iconDirs: [path.resolve(__dirname, './src/assets/svg')],
+      // 指定symbolId格式
+      symbolId: 'icon-[dir]-[name]',
+
+      /**
+       * 自定义插入位置
+       * @default: body-last
+       */
+      // inject?: 'body-last' | 'body-first',
+
+      /**
+       * custom dom id
+       * @default: __svg__icons__dom__
+       */
+      customDomId: '__svg__icons__dom__'
     }),
 
     Inspect()

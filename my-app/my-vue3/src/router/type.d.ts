@@ -12,9 +12,19 @@ declare module 'vue-router' {
   }
 }
 
-interface Route {
+export interface Route {
   path: string
   component: Component
   children?: Route[]
   meta: RouteMeta
+}
+
+export interface AsyncRoute {
+  path: string
+  component?: Component
+  children?: Route[]
+  customSvg?: boolean
+  icon?: string
+  name?: string
+  meta?: RouteMeta
 }

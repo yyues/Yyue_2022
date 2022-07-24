@@ -10,6 +10,7 @@ import { computed } from '@vue/runtime-core'
 import sideBarItem from './sideBarItem.vue'
 import { useStore } from '/@/store/store'
 import { useRouter, useRoute } from 'vue-router'
+import { AsyncRoute } from "/@/router/type";
 export default {
   name: 'LeftMenu',
   components: { sideBarItem },
@@ -44,13 +45,13 @@ export default {
        --el-menu-item-line-height:${MenuLineHeight.value};
       `
     )
-    const routers = reactive([
+    const routers = reactive<AsyncRoute[]>([
       {
         path: '/dashBoard',
         name: '首页',
         children: [],
         icon: 'Edit',
-        svg: false
+        customSvg: false
       }
     ])
 

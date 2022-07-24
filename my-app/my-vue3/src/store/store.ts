@@ -3,6 +3,7 @@ import { InjectionKey } from 'vue'
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
 // 导入 app 及类型推断
 import { app } from './module/app'
+import { color } from "./module/color";
 import { RootState, AllState } from './typing'
 export const key: InjectionKey<Store<RootState>> = Symbol()
 
@@ -11,7 +12,8 @@ export const store = createStore<RootState>({
     count: 0
   },
   modules: {
-    app
+    app,
+    color
   }
 })
 

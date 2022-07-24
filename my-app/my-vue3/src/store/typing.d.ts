@@ -12,6 +12,17 @@ export interface AppState {
   isApp: boolean
   isPad: boolean
 }
+export interface ColorState {
+  menu: {
+    MenuBackColor?: string
+    MenuActiveColor?: string
+    TextColor?: string
+    TextActiveColor?: string
+    HoverColor?: string
+    height?: string
+    lineHeight?:string
+  }
+}
 export enum SizeType {
   isWeb = 'isWeb',
   isPad = 'isPad',
@@ -19,4 +30,5 @@ export enum SizeType {
 }
 export interface AllState extends RootState {
   app: AppState
+  color: ColorState
 }

@@ -27,6 +27,9 @@ export default defineConfig({
       '/@': path.resolve(__dirname, './src')
     }
   },
+  server: {
+    port: 9001
+  },
   css: {
     preprocessorOptions: {
       scss: {
@@ -36,6 +39,7 @@ export default defineConfig({
   },
   plugins: [
     Vue(),
+    viteCompression(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
       dts: path.resolve(pathSrc, 'auto-imports.d.ts')

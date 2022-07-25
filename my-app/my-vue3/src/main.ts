@@ -14,7 +14,7 @@ const app = createApp(App)
 // 传入 injection key
 app.use(store, key)
 app.use(router)
-app.mount('#app')
+app.mount('#custom-app')
 
 // 如果您正在使用CDN引入，请删除下面一行。
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'

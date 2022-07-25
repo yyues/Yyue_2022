@@ -1,3 +1,4 @@
+import { AsyncRoute } from '/@/router/type'
 export interface RootState {
   count: number
 }
@@ -20,8 +21,14 @@ export interface ColorState {
     TextActiveColor?: string
     HoverColor?: string
     height?: string
-    lineHeight?:string
+    lineHeight?: string
   }
+}
+export interface UserState {
+  userInfo: {
+    [x: string]: any
+  }
+  userMenu: AsyncRoute[]
 }
 export enum SizeType {
   isWeb = 'isWeb',
@@ -31,4 +38,5 @@ export enum SizeType {
 export interface AllState extends RootState {
   app: AppState
   color: ColorState
+  user: UserState
 }

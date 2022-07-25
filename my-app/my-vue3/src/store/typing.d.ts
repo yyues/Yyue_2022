@@ -1,4 +1,5 @@
-import { AsyncRoute } from '/@/router/type'
+import { RouteRecordRaw } from 'vue-router'
+
 export interface RootState {
   count: number
 }
@@ -28,7 +29,7 @@ export interface UserState {
   userInfo: {
     [x: string]: any
   }
-  userMenu: AsyncRoute[]
+  userMenu: RouteRecordRaw[]
 }
 export enum SizeType {
   isWeb = 'isWeb',

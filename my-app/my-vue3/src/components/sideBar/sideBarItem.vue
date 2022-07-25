@@ -19,13 +19,13 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue'
-import { AsyncRoute } from '/@/router/type'
+import { RouteRecordRaw } from 'vue-router'
 
 export default defineComponent({
   name: 'sideBarItem',
   props: {
     router: {
-      type: Object as PropType<AsyncRoute[]>,
+      type: Object as PropType<RouteRecordRaw[]>,
       required: true
     }
   }

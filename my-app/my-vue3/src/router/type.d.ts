@@ -10,7 +10,7 @@ declare module 'vue-router' {
     // 组件过渡动画
     transition?: string
     // Icon
-    icon: string
+    icon?: string
     // Custom Icon
     customSvg?: boolean
   }
@@ -24,13 +24,6 @@ export interface Route {
   meta?: RouteMeta
 }
 
-export interface AsyncRoute {
-  path: string
-  redirect: string
-  component?: Component
-  children?: AsyncRoute[]
-  meta: RouteMeta
-}
 export interface AsyncBaseRoute {
   path: string
   redirect?: string

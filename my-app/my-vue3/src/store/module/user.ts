@@ -2,10 +2,9 @@ import { Module } from 'vuex'
 import { UserState, RootState } from '../typing'
 
 // 动态 Menu
-import { AsyncRoute, AsyncBaseRoute } from '/@/router/type'
+import { AsyncBaseRoute } from '/@/router/type'
 
 import router from '/@/router/router'
-import Login from '/@/views/login/login.vue'
 import { filterRouters } from '/@/utils/utils'
 export const user: Module<UserState, RootState> = {
   namespaced: true,
@@ -19,11 +18,7 @@ export const user: Module<UserState, RootState> = {
     },
     setUserMenu(state, payload: AsyncRoute[]) {
       state.userMenu = payload
-      payload.forEach(item => {
-        router.addRoute(item as any)
-        console.log(item, router)
-      })
-      router.replace(router.currentRoute.value.fullPath)
+      payload.forEach(item => router.addRoute(item))
     }
   },
   actions: {
@@ -50,7 +45,6 @@ export const user: Module<UserState, RootState> = {
           componentName: '/demo/about'
         }
       ]
-      router.addRoute({ path: '/set', component: Login })
       const data = filterRouters(route)
       await commit('setUserMenu', data)
     }

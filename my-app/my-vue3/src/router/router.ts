@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory, RouteLocationNormalized } from 'vue-router'
-import { Route } from './type'
+import { createRouter, createWebHistory, RouteLocationNormalized, RouteRecordRaw } from 'vue-router'
+
 import Home from '/@/views/home/home.vue'
 
 const { VITE_APP_BASE_TITLE } = import.meta.env
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/dashboard'

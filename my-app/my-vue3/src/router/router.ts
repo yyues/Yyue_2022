@@ -25,7 +25,7 @@ const routes: Route[] = [
   },
   {
     path: '/404',
-    component: () => import('/@/views/sys/404.vue'),
+    component: () => import('/@/views/sys/404/index.vue'),
     meta: {
       title: 'Page Not Found',
       keepAlive: false
@@ -33,7 +33,7 @@ const routes: Route[] = [
   },
   {
     path: '/405',
-    component: () => import('/@/views/sys/405.vue'),
+    component: () => import('/@/views/sys/405/index.vue'),
     meta: {
       title: 'Page Not Permission',
       keepAlive: false

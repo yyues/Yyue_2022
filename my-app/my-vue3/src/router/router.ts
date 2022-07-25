@@ -52,7 +52,7 @@ const beforeRouter = (
   next: Function
 ): void => {
   if (to.meta.title) {
-    document.title = to.meta.title
+    document.title = 'Custom App | ' + to.meta.title
   }
   next()
 }

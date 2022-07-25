@@ -9,22 +9,34 @@ declare module 'vue-router' {
     keepAlive?: boolean
     // 组件过渡动画
     transition?: string
+    // Icon
+    icon: string
+    // Custom Icon
+    customSvg?: boolean
   }
 }
 
 export interface Route {
   path: string
-  component: Component
-  children?: Route[]
-  meta: RouteMeta
+  redirect?: string
+  component?: Component
+  children?: Route[] | AsyncRoute[]
+  meta?: RouteMeta
 }
 
 export interface AsyncRoute {
   path: string
+  redirect: string
   component?: Component
-  children?: Route[]
+  children?: AsyncRoute[]
+  meta: RouteMeta
+}
+export interface AsyncBaseRoute {
+  path: string
+  redirect?: string
+  componentName?: string
+  children?: AsyncBaseRoute[]
   customSvg?: boolean
   icon?: string
   name?: string
-  meta?: RouteMeta
 }

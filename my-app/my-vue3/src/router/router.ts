@@ -1,14 +1,16 @@
-import {
-  createRouter,
-  createWebHistory,
-  RouteLocationNormalized
-} from 'vue-router'
+import { createRouter, createWebHistory, RouteLocationNormalized } from 'vue-router'
 import { Route } from './type'
 import Home from '/@/views/home/home.vue'
 
-const routes: Route[] = [
+const { VITE_APP_BASE_TITLE } = import.meta.env
+
+const routes = [
   {
     path: '/',
+    redirect: '/dashboard'
+  },
+  {
+    path: '/dashboard',
     component: Home,
     meta: {
       title: 'Home',
@@ -46,13 +48,9 @@ const router = createRouter({
   routes
 })
 // 路由前置守卫，实现 信息校验和 title 设置
-const beforeRouter = (
-  to: RouteLocationNormalized,
-  from: RouteLocationNormalized,
-  next: Function
-): void => {
+const beforeRouter = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: Function): void => {
   if (to.meta.title) {
-    document.title = 'Custom App | ' + to.meta.title
+    document.title = VITE_APP_BASE_TITLE + ' | ' + to.meta.title
   }
   next()
 }

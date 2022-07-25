@@ -1,5 +1,5 @@
 // PWA
-import { VitePWA } from 'vite-plugin-pwa'
+import { VitePWA, } from 'vite-plugin-pwa'
 // Gzip
 import viteCompression from 'vite-plugin-compression'
 

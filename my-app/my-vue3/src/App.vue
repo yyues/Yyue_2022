@@ -13,3 +13,15 @@
     </el-config-provider>
   </router-view>
 </template>
+<script lang="ts">
+import { onMounted } from 'vue'
+import { useStore } from './store/store'
+export default {
+  setup() {
+    const store = useStore()
+    onMounted(() => {
+      store.dispatch('user/GetUserMenu')
+    })
+  }
+}
+</script>

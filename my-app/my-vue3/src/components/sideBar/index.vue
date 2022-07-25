@@ -5,12 +5,11 @@
 </template>
 <script lang="ts">
 import { reactive, ref } from '@vue/reactivity'
-import { watch } from '@vue/runtime-core'
-import { computed } from '@vue/runtime-core'
+import { computed, watch } from '@vue/runtime-core'
 import sideBarItem from './sideBarItem.vue'
 import { useStore } from '/@/store/store'
 import { useRouter, useRoute } from 'vue-router'
-import { AsyncRoute } from "/@/router/type";
+
 export default {
   name: 'LeftMenu',
   components: { sideBarItem },
@@ -45,19 +44,11 @@ export default {
        --el-menu-item-line-height:${MenuLineHeight.value};
       `
     )
-    const routers = reactive<AsyncRoute[]>([
-      {
-        path: '/dashBoard',
-        name: '首页',
-        children: [],
-        icon: 'Edit',
-        customSvg: false
-      }
-    ])
+    const routers = computed(() => store.state.user.userMenu)
 
-    const handleClick = path => {
-      // console.log(e)
-      // router.push(path)
+    const handleClick = (path: string) => {
+      console.log(path, router)
+      router.push({ path })
     }
     return {
       isCollapse,

@@ -3,17 +3,20 @@
     <template #aside>
       <sideBar />
     </template>
-    <Table :header="columns" :data="tableData" hasSelection hasIndex />
+    <RouterView></RouterView>
+    <!-- <Table :header="columns" :data="tableData" hasSelection hasIndex /> -->
   </myContainer>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref ,onMounted} from 'vue'
 import { ElMessage } from 'element-plus'
 import sideBar from '/@/components/sideBar/index.vue'
 import Table from '/@/module/Table/index.vue'
+// import { useStore } from '/@/store/store'
 export default defineComponent({
   components: { sideBar, Table },
   setup() {
+    // const store = useStore()
     const handleClick = (): void => {
       ElMessage('this is a message.')
     }
@@ -51,6 +54,7 @@ export default defineComponent({
         f: 'No. 189, Grove St, Los Angeles'
       }
     ])
+    
     return {
       handleClick,
       columns,

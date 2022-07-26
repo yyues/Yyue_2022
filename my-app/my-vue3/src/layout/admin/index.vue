@@ -5,7 +5,7 @@
     </template>
     <template #default>
       <router-view v-slot="{ Component, route }">
-        <transition :name="route.meta.transition || 'el-fade-in'" appear>
+        <transition :name="route.meta.transition" appear>
           <keep-alive v-if="route.meta.keepAlive">
             <component :is="Component" />
           </keep-alive>

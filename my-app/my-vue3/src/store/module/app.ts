@@ -35,5 +35,10 @@ export const app: Module<AppState, RootState> = {
       state.isApp = state.isPad = state.isWeb = false
       state[payload.key] = payload.value
     }
+  },
+  actions: {
+    onLoad({ commit, state }) {
+      localStorage.setItem('onload', 'true')
+    }
   }
 }

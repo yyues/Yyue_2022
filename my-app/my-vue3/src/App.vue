@@ -22,8 +22,9 @@ export default {
     onMounted(() => {
       store.dispatch('user/GetUserMenu')
       window.addEventListener('beforeunload', () => {
-        localStorage.setItem('onload', 'true')
+        store.dispatch('app/onLoad')
       })
+      ;(document.getElementById('loading') as HTMLElement).remove()
     })
   }
 }

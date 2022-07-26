@@ -1,6 +1,7 @@
 import { RouteRecordRaw } from 'vue-router'
 
 export interface RootState {
+  user?: any
   count: number
 }
 export interface AppState {

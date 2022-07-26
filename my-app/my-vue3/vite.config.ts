@@ -77,6 +77,6 @@ export default defineConfig({
       customDomId: '__svg__icons__dom__'
     }),
 
-    Inspect()
+    // Inspect()
   ]
 })

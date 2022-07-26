@@ -21,6 +21,9 @@ export default {
     const store = useStore()
     onMounted(() => {
       store.dispatch('user/GetUserMenu')
+      window.addEventListener('beforeunload', () => {
+        localStorage.setItem('onload', 'true')
+      })
     })
   }
 }

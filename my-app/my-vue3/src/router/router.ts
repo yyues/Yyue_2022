@@ -1,16 +1,24 @@
-import { createRouter, createWebHistory, RouteLocationNormalized, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory, RouteLocationNormalized, RouteRecordRaw } from 'vue-router'
 
+import { store } from '/@/store/store'
+import BasePage from '/@/layout/base/index.vue'
 import Home from '/@/views/home/home.vue'
 
-const { VITE_APP_BASE_TITLE } = import.meta.env
+import { setRouteWithList } from '/@/utils/utils'
+
+const { VITE_WEB_HASH, VITE_APP_BASE_TITLE } = import.meta.env
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/dashboard'
+    component: BasePage,
+    meta: {
+      title: 'Yes',
+      keepAlive: true
+    }
   },
   {
-    path: '/dashboard',
+    path: '/home',
     component: Home,
     meta: {
       title: 'Home',
@@ -44,15 +52,23 @@ const routes: RouteRecordRaw[] = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: !!VITE_WEB_HASH ? createWebHashHistory() : createWebHistory(),
   routes
 })
+
 // 路由前置守卫，实现 信息校验和 title 设置
-const beforeRouter = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: Function): void => {
+const beforeRouter = async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: Function): void => {
   if (to.meta.title) {
     document.title = VITE_APP_BASE_TITLE + ' | ' + to.meta.title
   }
-  next()
+  const isLoad = localStorage.getItem('onload')
+  if (isLoad == 'true') {
+    await setRouteWithList(store.state.user.userMenu)
+    localStorage.setItem('onload', '')
+    next({ ...to})
+  } else {
+    next()
+  }
 }
 
 router.beforeEach(beforeRouter)

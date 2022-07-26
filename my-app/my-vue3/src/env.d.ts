@@ -18,5 +18,8 @@ interface ImportMetaEnv {
   readonly VITE_APP_BASE_TITLE: string
   readonly NODE_ENV: string
   readonly VITE_PROXY_BASE_URL: string
+  readonly VITE_ADMIN_BASE_ROUTE: string
+  readonly VITE_ADMIN_BASE_ROUTE_TITLE: string
+  readonly VITE_WEB_HASH: string
   // 更多环境变量...
 }

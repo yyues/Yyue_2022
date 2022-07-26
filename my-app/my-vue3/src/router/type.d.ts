@@ -1,6 +1,7 @@
 import 'vue-router'
 import { Component } from 'vue'
 import { RouteMeta } from 'vue-router'
+import { RouteRecordRaw } from 'vue-router'
 declare module 'vue-router' {
   interface RouteMeta {
     // title 标题
@@ -20,7 +21,7 @@ export interface Route {
   path: string
   redirect?: string
   component?: Component
-  children?: Route[] | AsyncRoute[]
+  children?: RouteRecordRaw[]
   meta?: RouteMeta
 }
 

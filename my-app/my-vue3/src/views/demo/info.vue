@@ -1,5 +1,5 @@
 <template>
   <span>
-    about
+    info
   </span>
 </template>

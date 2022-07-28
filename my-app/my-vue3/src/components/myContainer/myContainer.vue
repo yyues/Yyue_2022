@@ -1,29 +1,26 @@
 <template>
   <el-container :class="['my-layout', { 'is-app': isApp }, 'font-sans']">
     <div class="app-shadow" v-if="isApp && isOpen && !isHidden" @click="handleCloseAside"></div>
-    <el-header :height="height" class="my-header">
+    <el-header :height="height" class="shadow-md" v-if="!HasAsideAll">
       <slot name="header"></slot>
     </el-header>
     <el-container class="my-content">
       <template v-if="hasAside">
         <!-- has aside -->
-        <el-aside
-          :class="[
-            'my-aside',
-            { 'is-collapse': isCollapse },
-            { 'is-hidden': isHidden },
-            { 'is-open': isOpen }
-          ]"
-          :width="width"
-        >
+        <el-aside :class="['my-aside', { 'is-collapse': isCollapse }, { 'is-hidden': isHidden }, { 'is-open': isOpen }]" :width="width">
           <slot name="aside"></slot>
         </el-aside>
-        <el-main class="my-main">
-          <slot></slot>
-        </el-main>
+        <el-container>
+          <el-header :height="height" class="shadow-md" v-if="HasAsideAll">
+            <slot name="header"></slot>
+          </el-header>
+          <el-main class="m-2.5" style="--el-main-padding: 0">
+            <slot></slot>
+          </el-main>
+        </el-container>
       </template>
       <template v-else>
-        <el-main class="my-main">
+        <el-main class="m-2.5" style="--el-main-padding: 0">
           <slot></slot>
         </el-main>
       </template>
@@ -46,6 +43,10 @@ export default defineComponent({
     hasAside: {
       type: Boolean,
       default: true
+    },
+    HasAsideAll: {
+      type: Boolean,
+      default: false
     }
   },
   setup() {
@@ -58,6 +59,7 @@ export default defineComponent({
     const HiddenWidth = computed(() => store.state.app.HiddenWidth)
     const isApp = computed(() => store.state.app.isApp)
     const CollapseMenuWidth = computed(() => `${store.state.app.CollapseMenuWidth}px`)
+    const AsideBgColor = computed(() => store.state.color.menu.MenuBackColor)
     /**
      * @description: 用来控制窗口容器的resize ，通过vuex控制状态，自动 设置 class 样式
      * @param {*} void
@@ -97,30 +99,31 @@ export default defineComponent({
       // 监听 窗口折叠
       window.addEventListener('resize', debounce(handleResize, 150))
     })
-    const color = ref('#4f726c')
+
     return {
       width,
-      color,
       isCollapse,
       isHidden,
       isOpen,
       isApp,
       handleOpen,
       handleCloseAside,
-      CollapseMenuWidth
+      CollapseMenuWidth,
+      AsideBgColor
     }
   }
 })
 </script>
 <style lang="scss" scoped>
-$AsideBackColor: v-bind(color);
-$HeaderBackColor: #6a4028;
-$ContentBackColor: #bdc0ba;
+$AsideBgColor: v-bind(AsideBgColor);
 $AppShadowBackColor: rgba(0, 0, 0, 0.25);
 $CollapseWidth: v-bind(CollapseMenuWidth);
+
 .my-layout {
   height: 100%;
   position: relative;
+  --el-header-padding: 0;
+
   &.is-app {
     .is-open {
       position: absolute;
@@ -129,9 +132,6 @@ $CollapseWidth: v-bind(CollapseMenuWidth);
       top: 0;
       z-index: 20;
     }
-  }
-  .my-header {
-    background-color: $HeaderBackColor;
   }
   .app-shadow {
     position: absolute;
@@ -144,9 +144,8 @@ $CollapseWidth: v-bind(CollapseMenuWidth);
   }
   .my-content {
     flex: auto;
-    background-color: whitesmoke;
     .my-aside {
-      background-color: $AsideBackColor;
+      background-color: $AsideBgColor;
       transition: width 0.28s ease-in-out;
       &.is-collapse {
         width: $CollapseWidth !important;
@@ -154,10 +153,6 @@ $CollapseWidth: v-bind(CollapseMenuWidth);
       &.is-hidden {
         display: none;
       }
-    }
-    .my-main {
-      padding: 10px;
-      background-color: $ContentBackColor;
     }
   }
 }

@@ -4,6 +4,7 @@ import { store } from '/@/store/store'
 import BasePage from '/@/layout/base/index.vue'
 import Home from '/@/views/home/home.vue'
 
+import NProgress from 'nprogress'
 import { setRouteWithList } from '/@/utils/utils'
 
 const { VITE_WEB_HASH, VITE_APP_BASE_TITLE } = import.meta.env
@@ -58,6 +59,7 @@ const router = createRouter({
 
 // 路由前置守卫，实现 信息校验和 title 设置
 const beforeRouter = async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: Function): void => {
+  NProgress.start()
   if (to.meta.title) {
     document.title = VITE_APP_BASE_TITLE + ' | ' + to.meta.title
   }
@@ -65,11 +67,15 @@ const beforeRouter = async (to: RouteLocationNormalized, from: RouteLocationNorm
   if (isLoad == 'true') {
     await setRouteWithList(store.state.user.userMenu)
     localStorage.setItem('onload', '')
-    next({ ...to})
+    next({ ...to })
   } else {
     next()
   }
 }
 
 router.beforeEach(beforeRouter)
+
+router.afterEach(() => {
+  NProgress.done()
+})
 export default router

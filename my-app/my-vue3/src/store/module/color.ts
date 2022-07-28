@@ -5,10 +5,10 @@ export const color: Module<ColorState, RootState> = {
   state: {
     menu: {
       MenuActiveColor: '',
-      MenuBackColor: '',
+      MenuBackColor: '#4f726c',
       TextActiveColor: '',
-      TextColor: '',
-      HoverColor: '',
+      TextColor: 'whitesmoke',
+      HoverColor: 'gray',
       height: '',
       lineHeight: ''
     }

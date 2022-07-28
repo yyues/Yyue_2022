@@ -12,7 +12,8 @@ export const app: Module<AppState, RootState> = {
     isOpen: false,
     isWeb: false,
     isApp: false,
-    isPad: false
+    isPad: false,
+    isLoad: false
   },
   mutations: {
     setCollapseWidth(state: AppState, payload: number) {
@@ -34,10 +35,14 @@ export const app: Module<AppState, RootState> = {
     setTypeBySizeAndKey(state: AppState, payload: { key: SizeType; value: boolean }) {
       state.isApp = state.isPad = state.isWeb = false
       state[payload.key] = payload.value
+    },
+    setIsLoad(state, payload: boolean) {
+      state.isLoad = payload
     }
   },
   actions: {
-    onLoad({ commit, state }) {
+    onLoad({ commit }) {
+      commit('setIsLoad', true)
       localStorage.setItem('onload', 'true')
     }
   }

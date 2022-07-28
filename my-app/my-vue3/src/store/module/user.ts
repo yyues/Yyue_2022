@@ -36,7 +36,7 @@ export const user: Module<UserState, RootState> = {
           path: '/info',
           name: 'Info',
           children: [],
-          componentName: '/demo/info',
+          componentName: '/demo/ddd',
           icon: 'Camera',
           customSvg: false
         },

@@ -1,6 +1,7 @@
 import { RouteRecordRaw } from 'vue-router'
 
 export interface RootState {
+  [x: string]: any
   user?: any
   count: number
 }
@@ -14,6 +15,7 @@ export interface AppState {
   isWeb: boolean
   isApp: boolean
   isPad: boolean
+  isLoad: boolean
 }
 export interface ColorState {
   menu: {

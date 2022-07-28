@@ -20,11 +20,14 @@ export default {
   setup() {
     const store = useStore()
     onMounted(() => {
+      //  开局 获取菜单
       store.dispatch('user/GetUserMenu')
+      // 移除 loading 动画
+      ;(document.getElementById('loading') as HTMLElement).remove()
       window.addEventListener('beforeunload', () => {
+        // 监听刷新 事件处理
         store.dispatch('app/onLoad')
       })
-      ;(document.getElementById('loading') as HTMLElement).remove()
     })
   }
 }
